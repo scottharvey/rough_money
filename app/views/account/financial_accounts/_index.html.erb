@@ -1,0 +1,71 @@
+<% team = @team || @team %>
+<% context ||= team %>
+<% collection ||= :financial_accounts %>
+<% hide_actions ||= false %>
+<% hide_back ||= false %>
+
+<% financial_accounts = financial_accounts.order(:id) unless has_order?(financial_accounts) %>
+<% pagy, financial_accounts = pagy(financial_accounts, page_param: :financial_accounts_page) %>
+
+<%= render 'account/shared/box', pagy: pagy do |p| %>
+  <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
+  <% p.content_for :description do %>
+    <%= t(".contexts.#{context.class.name.underscore}.description#{"_empty" unless financial_accounts.any?}") %>
+  <% end %>
+
+  <% p.content_for :table do %>
+    <% if financial_accounts.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th><%= t('.fields.name.heading') %></th>
+            <th><%= t('.fields.description.heading') %></th>
+            <th><%= t('.fields.currency.heading') %></th>
+            <th><%= t('.fields.account_type.heading') %></th>
+            <%# 🚅 super scaffolding will insert new field headers above this line. %>
+            <th><%= t('.fields.updated_at.heading') %></th>
+            <th class="text-right"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% financial_accounts.each do |financial_account| %>
+            <% with_attribute_settings object: financial_account do %>
+              <tr data-id="<%= financial_account.id %>">
+                <td><%= render 'shared/attributes/text', attribute: :name, url: [:account, financial_account] %></td>
+                <td><%= render 'shared/attributes/text', attribute: :description %></td>
+                <td><%= render 'shared/attributes/option', attribute: :currency %></td>
+                <td><%= render 'shared/attributes/text', attribute: :account_type %></td>
+                <%# 🚅 super scaffolding will insert new fields above this line. %>
+                <td><%= render 'shared/attributes/date_and_time', attribute: :updated_at %></td>
+                <td class="buttons">
+                  <% unless hide_actions %>
+                    <% if can? :edit, financial_account %>
+                      <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, financial_account], class: 'button-secondary button-smaller' %>
+                    <% end %>
+                    <% if can? :destroy, financial_account %>
+                      <%= button_to t('.buttons.shorthand.destroy'), [:account, financial_account], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(financial_account)) }, class: 'button-secondary button-smaller' %>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
+
+  <% p.content_for :actions do %>
+    <% unless hide_actions %>
+      <% if context == team %>
+        <% if can? :create, FinancialAccount.new(team: team) %>
+          <%= link_to t('.buttons.new'), [:new, :account, team, :financial_account], class: "#{first_button_primary(:financial_account)} new" %>
+        <% end %>
+      <% end %>
+
+      <% unless hide_back %>
+        <%= link_to t('global.buttons.back'), [:account, context], class: "#{first_button_primary(:financial_account)} back" %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

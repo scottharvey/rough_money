@@ -1,0 +1,8 @@
+<% financial_account ||= @financial_account %>
+<% team ||= @team || financial_account&.team %>
+<%= render 'account/teams/breadcrumbs', team: team %>
+<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, team, :financial_accounts] %>
+<% if financial_account&.persisted? %>
+  <%= render 'account/shared/breadcrumb', label: financial_account.label_string, url: [:account, financial_account] %>
+<% end %>
+<%= render 'account/shared/breadcrumbs/actions', only_for: 'financial_accounts' %>

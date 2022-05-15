@@ -1,0 +1,109 @@
+en:
+  financial_accounts: &financial_accounts
+    label: &label Financial Accounts
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+      icon: ti ti-folder
+    buttons: &buttons
+      new: Add New Financial Account
+      create: Create Financial Account
+      edit: Edit Financial Account
+      update: Update Financial Account
+      destroy: Remove Financial Account
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{financial_account_name}? This will also remove it's associated data. This can't be undone.
+    fields: &fields
+      id:
+        heading: Financial Account ID
+      team_id:
+        heading: Team ID
+      name:
+        _: &name Name
+        label: *name
+        heading: *name
+      description:
+        _: &description Description
+        label: *description
+        heading: *description
+      currency:
+        _: &currency Currency
+        label: *currency
+        heading: *currency
+        placeholder: None
+        options:
+          one: THB
+          two: SGD
+      account_type:
+        _: &account_type Account Type
+        label: *account_type
+        heading: *account_type
+        placeholder: None
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    api:
+      collection_actions: "Collection Actions for Financial Accounts"
+      index: "List Financial Accounts"
+      create: "Add a New Financial Account"
+      member_actions: "Actions for an Individual Financial Account"
+      show: "Retrieve a Financial Account"
+      update: "Update a Financial Account"
+      destroy: "Delete a Financial Account"
+      fields: *fields
+    index:
+      section: "%{teams_possessive} Financial Accounts"
+      contexts:
+        team:
+          header: Financial Accounts
+          description: Below is a list of Financial Accounts that have been added for %{team_name}.
+          description_empty: No Financial Accounts have been added for %{team_name}.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{financial_account_name}"
+      header: Financial Account Details
+      description: Below are the details we have for %{financial_account_name}.
+      manage_description: You'll also find options for updating these details or removing %{financial_account_name} from %{team_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Financial Account for %{team_name}"
+      header: New Financial Account Details
+      description: Please provide the details of the new Financial Account you'd like to add to %{team_name}.
+      form: *form
+    edit:
+      section: "%{financial_account_name}"
+      header: Edit Financial Account Details
+      description: You can update the details or settings for %{financial_account_name} below.
+      form: *form
+    notifications:
+      created: Financial Account was successfully created.
+      updated: Financial Account was successfully updated.
+      destroyed: Financial Account was successfully destroyed.
+  account:
+    financial_accounts: *financial_accounts
+  activerecord:
+    attributes:
+      financial_account:
+        name: *name
+        description: *description
+        currency: *currency
+        account_type: *account_type
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

@@ -65,6 +65,8 @@ Rails.application.routes.draw do
         namespace :platform do
           resources :applications
         end
+
+        resources :financial_accounts
       end
     end
   end

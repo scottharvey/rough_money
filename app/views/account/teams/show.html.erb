@@ -8,6 +8,7 @@
   <% end %>
 
   <% p.content_for :body do %>
+    <%= render 'account/financial_accounts/index', financial_accounts: @team.financial_accounts, hide_back: true %>
     <%# 🚅 super scaffolding will insert new children above this line. %>
 
     <% unless scaffolding_things_disabled? %>

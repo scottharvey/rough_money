@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :financial_account do
-    team { nil }
+    association :team
     name { "MyString" }
     description { "MyString" }
     currency { "MyString" }
