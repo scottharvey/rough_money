@@ -166,5 +166,6 @@ gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
 # that you run into a merge conflict in the future.
+gem "money-rails"
 
 # 🚅 super scaffolding will insert new oauth providers above this line.
