@@ -1,0 +1,89 @@
+en:
+  snapshots: &snapshots
+    label: &label Snapshots
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+      icon: ti ti-camera
+    buttons: &buttons
+      new: Add New Snapshot
+      create: Create Snapshot
+      edit: Edit Snapshot
+      update: Update Snapshot
+      destroy: Remove Snapshot
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{snapshot_name}? This will also remove it's associated data. This can't be undone.
+    fields: &fields
+      id:
+        heading: Snapshot ID
+      team_id:
+        heading: Team ID
+      note:
+        _: &note Note
+        label: *note
+        heading: *note
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    api:
+      collection_actions: "Collection Actions for Snapshots"
+      index: "List Snapshots"
+      create: "Add a New Snapshot"
+      member_actions: "Actions for an Individual Snapshot"
+      show: "Retrieve a Snapshot"
+      update: "Update a Snapshot"
+      destroy: "Delete a Snapshot"
+      fields: *fields
+    index:
+      section: "%{teams_possessive} Snapshots"
+      contexts:
+        team:
+          header: Snapshots
+          description: Below is a list of Snapshots that have been added for %{team_name}.
+          description_empty: No Snapshots have been added for %{team_name}.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{snapshot_name}"
+      header: Snapshot Details
+      description: Below are the details we have for %{snapshot_name}.
+      manage_description: You'll also find options for updating these details or removing %{snapshot_name} from %{team_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Snapshot for %{team_name}"
+      header: New Snapshot Details
+      description: Please provide the details of the new Snapshot you'd like to add to %{team_name}.
+      form: *form
+    edit:
+      section: "%{snapshot_name}"
+      header: Edit Snapshot Details
+      description: You can update the details or settings for %{snapshot_name} below.
+      form: *form
+    notifications:
+      created: Snapshot was successfully created.
+      updated: Snapshot was successfully updated.
+      destroyed: Snapshot was successfully destroyed.
+  account:
+    snapshots: *snapshots
+  activerecord:
+    attributes:
+      snapshot:
+        note: *note
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

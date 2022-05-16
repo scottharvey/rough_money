@@ -67,6 +67,7 @@ Rails.application.routes.draw do
         end
 
         resources :financial_accounts
+        resources :snapshots
       end
     end
   end

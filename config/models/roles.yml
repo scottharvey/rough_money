@@ -1,5 +1,6 @@
 default:
   models:
+    Snapshot: read
     FinancialAccount: read
     Team: read
     Membership:
@@ -29,6 +30,7 @@ admin:
     - admin
     - editor
   models:
+    Snapshot: manage
     FinancialAccount: manage
     Team: manage
     Membership: manage

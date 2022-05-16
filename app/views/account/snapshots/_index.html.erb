@@ -1,0 +1,63 @@
+<% team = @team || @team %>
+<% context ||= team %>
+<% collection ||= :snapshots %>
+<% hide_actions ||= false %>
+<% hide_back ||= false %>
+
+<% snapshots = snapshots.order(:id) unless has_order?(snapshots) %>
+<% pagy, snapshots = pagy(snapshots, page_param: :snapshots_page) %>
+
+<%= render 'account/shared/box', pagy: pagy do |p| %>
+  <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
+  <% p.content_for :description do %>
+    <%= t(".contexts.#{context.class.name.underscore}.description#{"_empty" unless snapshots.any?}") %>
+  <% end %>
+
+  <% p.content_for :table do %>
+    <% if snapshots.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <%# 🚅 super scaffolding will insert new field headers above this line. %>
+            <th><%= t('.fields.created_at.heading') %></th>
+            <th class="text-right"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% snapshots.each do |snapshot| %>
+            <% with_attribute_settings object: snapshot do %>
+              <tr data-id="<%= snapshot.id %>">
+                <%# 🚅 super scaffolding will insert new fields above this line. %>
+                <td><%= render 'shared/attributes/date_and_time', attribute: :created_at %></td>
+                <td class="buttons">
+                  <% unless hide_actions %>
+                    <% if can? :edit, snapshot %>
+                      <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, snapshot], class: 'button-secondary button-smaller' %>
+                    <% end %>
+                    <% if can? :destroy, snapshot %>
+                      <%= button_to t('.buttons.shorthand.destroy'), [:account, snapshot], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(snapshot)) }, class: 'button-secondary button-smaller' %>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
+
+  <% p.content_for :actions do %>
+    <% unless hide_actions %>
+      <% if context == team %>
+        <% if can? :create, Snapshot.new(team: team) %>
+          <%= link_to t('.buttons.new'), [:new, :account, team, :snapshot], class: "#{first_button_primary(:snapshot)} new" %>
+        <% end %>
+      <% end %>
+
+      <% unless hide_back %>
+        <%= link_to t('global.buttons.back'), [:account, context], class: "#{first_button_primary(:snapshot)} back" %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

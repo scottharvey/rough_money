@@ -1,20 +1,18 @@
-class Team < ApplicationRecord
-  include Teams::Base
-  include Webhooks::Outgoing::TeamSupport
+class Snapshot < ApplicationRecord
   # 🚅 add concerns above.
 
+  # 🚅 add attribute accessors above.
+
+  belongs_to :team
   # 🚅 add belongs_to associations above.
 
-  has_many :financial_accounts, dependent: :destroy, enable_updates: true
-  has_many :snapshots, dependent: :destroy
   # 🚅 add has_many associations above.
-
-  # 🚅 add oauth providers above.
 
   # 🚅 add has_one associations above.
 
   # 🚅 add scopes above.
 
+  validates :note, presence: true
   # 🚅 add validations above.
 
   # 🚅 add callbacks above.
