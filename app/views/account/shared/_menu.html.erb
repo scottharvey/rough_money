@@ -3,8 +3,8 @@
     <%= render 'account/teams/menu_item' %>
     <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/menu_item' unless scaffolding_things_disabled? %>
     <% # added by super scaffolding. %>
-    <%= render 'account/financial_accounts/menu_item' %>
     <%= render 'account/snapshots/menu_item' %>
+    <%= render 'account/financial_accounts/menu_item' %>
   <% end %>
 
   <%= render 'account/shared/menu/section', title: t('menus.main.labels.integrations') do %>

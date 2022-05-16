@@ -25,7 +25,6 @@ en:
       body:
         html:
           <p>This is the default welcome email! The content of this welcome email can be updated in `config/locales/en/user_mailer.en.yml`.</p>
-          <p>Thanks to the team at <a href="https://postmarkapp.com">Postmark</a> for making the original foundation for this email template <a href="https://github.com/wildbit/postmark-templates">freely available</a>.</p>
       cta:
         heading: What's next?
         body: You can use the following link to return to your account dashboard.
