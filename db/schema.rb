@@ -250,7 +250,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_16_130952) do
   create_table "snapshots", force: :cascade do |t|
     t.bigint "team_id", null: false
     t.string "note"
-    t.money "total", scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_snapshots_on_team_id"
